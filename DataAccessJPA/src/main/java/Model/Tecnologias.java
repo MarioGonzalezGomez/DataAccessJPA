@@ -30,5 +30,31 @@ public enum Tecnologias {
     @JoinColumn(name = "programador_id")
     private Programador programador;
 
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public Proyecto getProyecto() {
+        return proyecto;
+    }
+
+    public void setProyecto(Proyecto proyecto) {
+        this.proyecto = proyecto;
+    }
+
+    public Programador getProgramador() {
+        return programador;
+    }
+
+    public void setProgramador(Programador programador) {
+        this.programador = programador;
+    }
+
+
 }
 

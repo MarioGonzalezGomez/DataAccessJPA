@@ -6,8 +6,11 @@
     <persistence-unit name="default">
         <description>Persistencia de los datos de androides con Hibernate JPA</description>
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-        <!-- ponemos las clases "entidad" -->
 
+        <class>Model.Departamento</class>
+        <class>Model.Programador</class>
+        <class>Model.Proyecto</class>
+        <class>Model.Tecnologias</class>
 
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>

@@ -50,5 +50,69 @@ public class Programador {
     public static UUID getId() {
         return id;
     }
+
+    public static void setId(UUID id) {
+        Programador.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public Date getFecha_alta() {
+        return fecha_alta;
+    }
+
+    public void setFecha_alta(Date fecha_alta) {
+        this.fecha_alta = fecha_alta;
+    }
+
+    public Departamento getDepartamento() {
+        return departamento;
+    }
+
+    public void setDepartamento(Departamento departamento) {
+        this.departamento = departamento;
+    }
+
+    public Set<Proyecto> getProyectos() {
+        return proyectos;
+    }
+
+    public void setProyectos(Set<Proyecto> proyectos) {
+        this.proyectos = proyectos;
+    }
+
+    public Set<Tecnologias> getTecnologias() {
+        return tecnologias;
+    }
+
+    public void setTecnologias(Set<Tecnologias> tecnologias) {
+        this.tecnologias = tecnologias;
+    }
+
+    public Double getSueldo() {
+        return sueldo;
+    }
+
+    public void setSueldo(Double sueldo) {
+        this.sueldo = sueldo;
+    }
+
+    @Override
+    public String toString() {
+        return "Programador{" +
+                "nombre='" + nombre + '\'' +
+                ", fecha_alta=" + fecha_alta +
+                ", departamento=" + departamento +
+                ", proyectos=" + proyectos +
+                ", tecnologias=" + tecnologias +
+                ", sueldo=" + sueldo +
+                '}';
+    }
 }
 
