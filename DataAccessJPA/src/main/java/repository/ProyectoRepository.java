@@ -1,7 +1,7 @@
-package Repository;
+package repository;
 
 import Controller.HibernateController;
-import Model.Proyecto;
+import model.Proyecto;
 
 import javax.persistence.TypedQuery;
 import java.sql.SQLException;
@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-public class ProyectoRepository {
+public class ProyectoRepository implements CrudRepository<Proyecto, String> {
     HibernateController hb;
 
     public ProyectoRepository() {

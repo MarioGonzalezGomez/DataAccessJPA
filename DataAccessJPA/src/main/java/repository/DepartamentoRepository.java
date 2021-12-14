@@ -1,7 +1,8 @@
-package Repository;
+package repository;
+
 
 import Controller.HibernateController;
-import Model.Departamento;
+import model.Departamento;
 
 import javax.persistence.TypedQuery;
 import java.sql.SQLException;
@@ -9,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-public class DepartamentoRepository {
+public class DepartamentoRepository implements CrudRepository<Departamento, String> {
     HibernateController hb;
 
     public DepartamentoRepository() {
@@ -23,6 +24,8 @@ public class DepartamentoRepository {
         hb.close();
         return departamentos;
     }
+
+
 
     public Optional<Departamento> findById(UUID id) {
         hb.open();
@@ -71,6 +74,7 @@ public class DepartamentoRepository {
         }
 
     }
+
 
     public Optional<Departamento> delete(UUID id) throws SQLException {
 
