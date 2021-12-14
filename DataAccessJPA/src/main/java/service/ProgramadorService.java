@@ -1,20 +1,16 @@
 package service;
 
+import repository.ProgramadorRepository;
 import dto.ProgramadorDTO;
 import mapper.ProgramadorMapper;
-import model.Departamento;
 import model.Programador;
-import model.Proyecto;
-import repository.DepartamentoRepository;
-import repository.ProgramadorRepository;
-import repository.ProyectoRepository;
-
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
 
-public class ProgramadorService extends BaseService<Programador, String, ProgramadorRepository> {
+import java.util.List;
+import java.util.UUID;
+
+
+public class ProgramadorService extends service.BaseService<Programador, String, ProgramadorRepository> {
     ProgramadorMapper mapper = new ProgramadorMapper();
     public ProgramadorService(ProgramadorRepository repository) {
         super(repository);
@@ -24,7 +20,7 @@ public class ProgramadorService extends BaseService<Programador, String, Program
         return mapper.toDTO(this.findAll());
     }
 
-    public ProgramadorDTO getProgramadorById(String id) throws SQLException {
+    public ProgramadorDTO getProgramadorById(UUID id) throws SQLException {
         return mapper.toDTO(this.getById(id));
     }
 
@@ -40,7 +36,7 @@ public class ProgramadorService extends BaseService<Programador, String, Program
     }
 
     public ProgramadorDTO deleteProgramador(ProgramadorDTO programadorDTO) throws SQLException {
-        Programador res = this.delete(mapper.fromDTO(programadorDTO));
+        Programador res = this.delete((mapper.fromDTO(programadorDTO)).getId());
         return mapper.toDTO(res);
     }
 

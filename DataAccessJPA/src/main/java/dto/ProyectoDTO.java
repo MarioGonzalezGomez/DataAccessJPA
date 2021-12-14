@@ -1,5 +1,6 @@
 package dto;
 
+import model.Departamento;
 import model.Programador;
 import model.Tecnologias;
 import com.google.gson.Gson;
@@ -8,20 +9,22 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.sql.Date;
+import java.util.UUID;
 
 @Data
 @Builder
 public class ProyectoDTO {
 
-    private String id;
+    private UUID id;
     private Programador jefeProyecto;
     private String nombre;
     private Double presupuesto;
     private Date fecha_inicio;
     private Date fecha_fin;
     private Tecnologias tecnologia;
-    private String idJefe;
-
+    private UUID idJefe;
+    private UUID idDepartamento;
+    private UUID idProgramador;
 
 
     public static ProyectoDTO fromJSON(String json) {
@@ -33,7 +36,6 @@ public class ProyectoDTO {
         final Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
         return prettyGson.toJson(this);
     }
-
 
 
 }

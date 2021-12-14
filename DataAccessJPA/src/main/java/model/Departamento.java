@@ -21,22 +21,22 @@ public class Departamento {
     private String nombre;
 
     @OneToOne
-    private Programador jefeDepartamento;
+    private model.Programador jefeDepartamento;
 
     @Column
     private Double presupuesto;
 
     @OneToMany(mappedBy = "departamento", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    private Set<Proyecto> proyectosTerminados;
+    private Set<model.Proyecto> proyectosTerminados;
 
     @OneToMany(mappedBy = "departamento", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    private Set<Proyecto> proyectosDesarrollo;
+    private Set<model.Proyecto> proyectosDesarrollo;
 
     @Column
     private Double presupuestoAnual;
 
     @OneToMany(mappedBy = "departamento", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    private Set<Programador> historicoJefes;
+    private Set<model.Programador> historicoJefes;
 
 
 
@@ -67,11 +67,11 @@ public class Departamento {
         this.nombre = nombre;
     }
 
-    public Programador getJefeDepartamento() {
+    public model.Programador getJefeDepartamento() {
         return jefeDepartamento;
     }
 
-    public void setJefeDepartamento(Programador jefeDepartamento) {
+    public void setJefeDepartamento(model.Programador jefeDepartamento) {
         this.jefeDepartamento = jefeDepartamento;
     }
 
@@ -83,19 +83,19 @@ public class Departamento {
         this.presupuesto = presupuesto;
     }
 
-    public Set<Proyecto> getProyectosTerminados() {
+    public Set<model.Proyecto> getProyectosTerminados() {
         return proyectosTerminados;
     }
 
-    public void setProyectosTerminados(Set<Proyecto> proyectosTerminados) {
+    public void setProyectosTerminados(Set<model.Proyecto> proyectosTerminados) {
         this.proyectosTerminados = proyectosTerminados;
     }
 
-    public Set<Proyecto> getProyectosDesarrollo() {
+    public Set<model.Proyecto> getProyectosDesarrollo() {
         return proyectosDesarrollo;
     }
 
-    public void setProyectosDesarrollo(Set<Proyecto> proyectosDesarrollo) {
+    public void setProyectosDesarrollo(Set<model.Proyecto> proyectosDesarrollo) {
         this.proyectosDesarrollo = proyectosDesarrollo;
     }
 
@@ -107,11 +107,11 @@ public class Departamento {
         this.presupuestoAnual = presupuestoAnual;
     }
 
-    public Set<Programador> getHistoricoJefes() {
+    public Set<model.Programador> getHistoricoJefes() {
         return historicoJefes;
     }
 
-    public void setHistoricoJefes(Set<Programador> historicoJefes) {
+    public void setHistoricoJefes(Set<model.Programador> historicoJefes) {
         this.historicoJefes = historicoJefes;
     }
 

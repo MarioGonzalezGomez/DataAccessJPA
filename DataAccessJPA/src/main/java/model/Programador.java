@@ -16,7 +16,7 @@ public class Programador {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private static String id;
+    private static UUID id;
 
     @Column
     private String nombre;
@@ -28,10 +28,10 @@ public class Programador {
     private Departamento departamento;
 
     @OneToMany(mappedBy = "programador", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    private Set<Proyecto> proyectos;
+    private Set<model.Proyecto> proyectos;
 
     @OneToMany(mappedBy = "programador", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    private Set<Tecnologias> tecnologias;
+    private Set<model.Tecnologias> tecnologias;
 
     @Column
     private Double sueldo;
@@ -47,11 +47,11 @@ public class Programador {
         return prettyGson.toJson(this);
     }
 
-    public static String getId() {
+    public static UUID getId() {
         return id;
     }
 
-    public static void setId(String id) {
+    public static void setId(UUID id) {
         Programador.id = id;
     }
 
@@ -79,19 +79,19 @@ public class Programador {
         this.departamento = departamento;
     }
 
-    public Set<Proyecto> getProyectos() {
+    public Set<model.Proyecto> getProyectos() {
         return proyectos;
     }
 
-    public void setProyectos(Set<Proyecto> proyectos) {
+    public void setProyectos(Set<model.Proyecto> proyectos) {
         this.proyectos = proyectos;
     }
 
-    public Set<Tecnologias> getTecnologias() {
+    public Set<model.Tecnologias> getTecnologias() {
         return tecnologias;
     }
 
-    public void setTecnologias(Set<Tecnologias> tecnologias) {
+    public void setTecnologias(Set<model.Tecnologias> tecnologias) {
         this.tecnologias = tecnologias;
     }
 

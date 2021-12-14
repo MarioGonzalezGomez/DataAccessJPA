@@ -15,14 +15,14 @@ import java.util.UUID;
 @Data
 @Builder
 public class ProgramadorDTO {
-    private String id;
+    private UUID id;
     private String nombre;
     private Date fecha_alta;
     private Departamento departamento;
     private Set<Proyecto> proyectos;
     private Tecnologias tecnologias;
     private Double sueldo;
-    private String idDepartamento;
+    private UUID idDepartamento;
     private String contraseña;
 
 

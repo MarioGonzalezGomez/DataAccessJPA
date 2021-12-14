@@ -1,47 +1,44 @@
 package repository;
 
 
-import Controller.HibernateController;
+import controller.HibernateController;
 import model.Departamento;
 
 import javax.persistence.TypedQuery;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
-public class DepartamentoRepository implements CrudRepository<Departamento, String> {
+public class DepartamentoRepository implements repository.CrudRepository<Departamento, String> {
     HibernateController hb;
 
     public DepartamentoRepository() {
         hb = new HibernateController();
     }
 
-    public Optional<List<Departamento>> findAll() {
+    public List<Departamento> findAll() {
         hb.open();
         TypedQuery<Departamento> query = hb.getManager().createNamedQuery("Departamento.findAll", Departamento.class);
-        Optional<List<Departamento>> departamentos = Optional.ofNullable(query.getResultList());
+        List<Departamento> departamentos = query.getResultList();
         hb.close();
         return departamentos;
     }
 
-
-
-    public Optional<Departamento> findById(UUID id) {
+    public Departamento getById(UUID id) {
         hb.open();
         Departamento dep = hb.getManager().find(Departamento.class, id);
         hb.close();
-        return Optional.of(dep);
+        return dep;
     }
 
-    public Optional<Departamento> save(Departamento dep) throws SQLException {
+    public Departamento save(Departamento dep) throws SQLException {
         hb.open();
         try {
             hb.getTransaction().begin();
             hb.getManager().persist(dep);
             hb.getTransaction().commit();
             hb.close();
-            return Optional.of(dep);
+
         } catch (Exception e) {
 
         } finally {
@@ -51,18 +48,18 @@ public class DepartamentoRepository implements CrudRepository<Departamento, Stri
             hb.close();
 
         }
-        return Optional.empty();
+        return dep;
     }
 
 
-    public Optional<Departamento> update(Departamento dep) throws SQLException {
+    public Departamento update(Departamento dep) throws SQLException {
         hb.open();
         try {
             hb.getTransaction().begin();
             hb.getManager().merge(dep);
             hb.getTransaction().commit();
             hb.close();
-            return Optional.of(dep);
+            return dep;
         } catch (Exception e) {
             throw new SQLException("Error al actualizar departamento con id: " + dep.getId());
         } finally {
@@ -75,8 +72,7 @@ public class DepartamentoRepository implements CrudRepository<Departamento, Stri
 
     }
 
-
-    public Optional<Departamento> delete(UUID id) throws SQLException {
+    public Departamento delete(UUID id) throws SQLException {
 
         hb.open();
         try {
@@ -85,7 +81,7 @@ public class DepartamentoRepository implements CrudRepository<Departamento, Stri
             hb.getManager().remove(dep);
             hb.getTransaction().commit();
             hb.close();
-            return Optional.of(dep);
+            return dep;
         } catch (Exception e) {
             throw new SQLException("Error al eliminar departamento con id: " + id);
         } finally {

@@ -2,6 +2,7 @@ package repository;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.UUID;
 
 public interface CrudRepository<T, String> {
 
@@ -11,7 +12,7 @@ public interface CrudRepository<T, String> {
     List<T> findAll() throws SQLException;
 
     // Obtiene por ID
-    T getById(String d) throws SQLException;
+    T getById(UUID d) throws SQLException;
 
     // Salva
     T save(T t) throws SQLException;
@@ -20,7 +21,7 @@ public interface CrudRepository<T, String> {
     T update(T t) throws SQLException;
 
     // Elimina
-    T delete(T t) throws SQLException;
+    T delete(UUID d) throws SQLException;
 
 
 }

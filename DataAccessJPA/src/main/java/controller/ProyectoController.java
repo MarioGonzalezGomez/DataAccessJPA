@@ -1,12 +1,14 @@
-package Controller;
+package controller;
 
-import dto.ProyectoDTO;
 import repository.ProyectoRepository;
 import service.ProyectoService;
+import dto.ProyectoDTO;
+
 
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 public class ProyectoController {
     private static ProyectoController controller = null;
@@ -35,8 +37,8 @@ public class ProyectoController {
         }
     }
 
-    public ProyectoDTO getProyectoById(String id) {
-        try{
+    public ProyectoDTO getProyectoById(UUID id) {
+        try {
             return proyectoService.getProyectoById(id);
         } catch (SQLException e) {
             System.err.println("Error ProyectoController en getCategoryById: " + e.getMessage());
@@ -72,7 +74,7 @@ public class ProyectoController {
     }
 
 
-    public Optional<ProyectoDTO> getProyectoyByIdOptional(String id) {
+    public Optional<ProyectoDTO> getProyectoyByIdOptional(UUID id) {
         try {
             return Optional.of(proyectoService.getProyectoById(id));
         } catch (SQLException e) {

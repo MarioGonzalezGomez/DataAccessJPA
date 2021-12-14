@@ -1,45 +1,42 @@
 package repository;
 
-import Controller.HibernateController;
-import model.Departamento;
+import controller.HibernateController;
 import model.Programador;
 
 import javax.persistence.TypedQuery;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
-public class ProgramadorRepository implements CrudRepository<Programador, String> {
+public class ProgramadorRepository implements repository.CrudRepository<Programador, String> {
     HibernateController hb;
 
     public ProgramadorRepository() {
         hb = new HibernateController();
     }
 
-    public Optional<List<Programador>> findAll() {
+    public List<Programador> findAll() {
         hb.open();
         TypedQuery<Programador> query = hb.getManager().createNamedQuery("Programador.findAll", Programador.class);
-        Optional<List<Programador>> programadores = Optional.ofNullable(query.getResultList());
+        List<Programador> programadores = query.getResultList();
         hb.close();
         return programadores;
     }
 
-    public Optional<Programador> findById(UUID id) {
+    public Programador getById(UUID id) {
         hb.open();
         Programador prog = hb.getManager().find(Programador.class, id);
         hb.close();
-        return Optional.of(prog);
+        return prog;
     }
 
-    public Optional<Programador> save(Programador prog) throws SQLException {
+    public Programador save(Programador prog) throws SQLException {
         hb.open();
         try {
             hb.getTransaction().begin();
             hb.getManager().persist(prog);
             hb.getTransaction().commit();
             hb.close();
-            return Optional.of(prog);
         } catch (Exception e) {
 
         } finally {
@@ -49,18 +46,18 @@ public class ProgramadorRepository implements CrudRepository<Programador, String
             hb.close();
 
         }
-        return Optional.empty();
+        return prog;
     }
 
 
-    public Optional<Programador> update(Programador prog) throws SQLException {
+    public Programador update(Programador prog) throws SQLException {
         hb.open();
         try {
             hb.getTransaction().begin();
             hb.getManager().merge(prog);
             hb.getTransaction().commit();
             hb.close();
-            return Optional.of(prog);
+            return prog;
         } catch (Exception e) {
             throw new SQLException("Error al actualizar programador con id: " + prog.getId());
         } finally {
@@ -73,16 +70,16 @@ public class ProgramadorRepository implements CrudRepository<Programador, String
 
     }
 
-    public Optional<Departamento> delete(UUID id) throws SQLException {
+    public Programador delete(UUID id) throws SQLException {
 
         hb.open();
         try {
             hb.getTransaction().begin();
-            Departamento dep = hb.getManager().find(Departamento.class, Programador.getId());
-            hb.getManager().remove(dep);
+            Programador prog = hb.getManager().find(Programador.class, Programador.getId());
+            hb.getManager().remove(prog);
             hb.getTransaction().commit();
             hb.close();
-            return Optional.of(dep);
+            return prog;
         } catch (Exception e) {
             throw new SQLException("Error al eliminar programador con id: " + id);
         } finally {

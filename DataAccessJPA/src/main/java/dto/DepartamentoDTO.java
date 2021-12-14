@@ -8,13 +8,14 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.util.Set;
+import java.util.UUID;
 
 @Data
 @Builder
 public class DepartamentoDTO {
 //Esta clase ya tiene objetos.
 
-    private String id;
+    private UUID id;
     private String nombre;
     private Programador jefeDepartamento;
     private Double presupuesto;
@@ -22,7 +23,7 @@ public class DepartamentoDTO {
     private Set<Proyecto> proyectosDesarrollo;
     private Double presupuestoAnual;
     private Set<Programador> historicoJefes;
-    private String idJefe;
+    private UUID idJefe;
 
 
     public static DepartamentoDTO fromJSON(String json) {

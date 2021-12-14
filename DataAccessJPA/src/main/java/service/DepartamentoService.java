@@ -1,22 +1,15 @@
 package service;
 
-import dto.DepartamentoDTO;
-import dto.ProgramadorDTO;
-import mapper.DepartamentoMapper;
-import mapper.ProgramadorMapper;
-import model.Departamento;
-import model.Programador;
-import model.Proyecto;
 import repository.DepartamentoRepository;
-import repository.ProgramadorRepository;
-import repository.ProyectoRepository;
+import dto.DepartamentoDTO;
+import mapper.DepartamentoMapper;
+import model.Departamento;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
+import java.util.UUID;
 
-public class DepartamentoService extends BaseService<Departamento, String, DepartamentoRepository> {
+public class DepartamentoService extends service.BaseService<Departamento, String, DepartamentoRepository> {
     DepartamentoMapper mapper = new DepartamentoMapper();
     public DepartamentoService(DepartamentoRepository repository) {
         super(repository);
@@ -26,7 +19,7 @@ public class DepartamentoService extends BaseService<Departamento, String, Depar
         return mapper.toDTO(this.findAll());
     }
 
-    public DepartamentoDTO getDepartamentoById(String id) throws SQLException {
+    public DepartamentoDTO getDepartamentoById(UUID id) throws SQLException {
         return mapper.toDTO(this.getById(id));
     }
 
@@ -42,7 +35,7 @@ public class DepartamentoService extends BaseService<Departamento, String, Depar
     }
 
     public DepartamentoDTO deleteDepartamento(DepartamentoDTO departamentoDTO) throws SQLException {
-        Departamento res = this.delete(mapper.fromDTO(departamentoDTO));
+        Departamento res = this.delete((mapper.fromDTO(departamentoDTO)).getId());
         return mapper.toDTO(res);
     }
 

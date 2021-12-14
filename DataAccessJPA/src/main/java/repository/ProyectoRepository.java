@@ -1,44 +1,44 @@
 package repository;
 
-import Controller.HibernateController;
+import controller.HibernateController;
 import model.Proyecto;
 
 import javax.persistence.TypedQuery;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
+
 import java.util.UUID;
 
-public class ProyectoRepository implements CrudRepository<Proyecto, String> {
+public class ProyectoRepository implements repository.CrudRepository<Proyecto, String> {
     HibernateController hb;
 
     public ProyectoRepository() {
         hb = new HibernateController();
     }
 
-    public Optional<List<Proyecto>> findAll() {
+    public List<Proyecto> findAll() {
         hb.open();
         TypedQuery<Proyecto> query = hb.getManager().createNamedQuery("Proyecto.findAll", Proyecto.class);
-        Optional<List<Proyecto>> proyectos = Optional.ofNullable(query.getResultList());
+       List<Proyecto> proyectos = query.getResultList();
         hb.close();
         return proyectos;
     }
 
-    public Optional<Proyecto> findById(UUID id) {
+    public Proyecto getById(UUID id) {
         hb.open();
         Proyecto proy = hb.getManager().find(Proyecto.class, id);
         hb.close();
-        return Optional.of(proy);
+        return proy;
     }
 
-    public Optional<Proyecto> save(Proyecto proy) throws SQLException {
+    public Proyecto save(Proyecto proy) throws SQLException {
         hb.open();
         try {
             hb.getTransaction().begin();
             hb.getManager().persist(proy);
             hb.getTransaction().commit();
             hb.close();
-            return Optional.of(proy);
+            return proy;
         } catch (Exception e) {
 
         } finally {
@@ -48,18 +48,18 @@ public class ProyectoRepository implements CrudRepository<Proyecto, String> {
             hb.close();
 
         }
-        return Optional.empty();
+        return null;
     }
 
 
-    public Optional<Proyecto> update(Proyecto proy) throws SQLException {
+    public Proyecto update(Proyecto proy) throws SQLException {
         hb.open();
         try {
             hb.getTransaction().begin();
             hb.getManager().merge(proy);
             hb.getTransaction().commit();
             hb.close();
-            return Optional.of(proy);
+            return proy;
         } catch (Exception e) {
             throw new SQLException("Error al actualizar proyecto con id: " + proy.getId());
         } finally {
@@ -72,7 +72,7 @@ public class ProyectoRepository implements CrudRepository<Proyecto, String> {
 
     }
 
-    public Optional<Proyecto> delete(UUID id) throws SQLException {
+    public Proyecto delete(UUID id) throws SQLException {
 
         hb.open();
         try {
@@ -81,7 +81,7 @@ public class ProyectoRepository implements CrudRepository<Proyecto, String> {
             hb.getManager().remove(proy);
             hb.getTransaction().commit();
             hb.close();
-            return Optional.of(proy);
+            return proy;
         } catch (Exception e) {
             throw new SQLException("Error al eliminar proyecto con id: " + id);
         } finally {

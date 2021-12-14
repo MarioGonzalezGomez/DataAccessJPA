@@ -1,4 +1,4 @@
-import Controller.ProyectoController;
+import controller.ProyectoController;
 import database.DataBaseController;
 import dto.ProyectoDTO;
 
@@ -8,61 +8,62 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.Optional;
+import java.util.UUID;
 
 
-    public class Facade {
-        private static Facade instance;
+public class Facade {
+    private static Facade instance;
 
 
-        public static Facade getInstance() {
-            if (instance == null) {
-                instance = new Facade();
-            }
-            return instance;
+    public static Facade getInstance() {
+        if (instance == null) {
+            instance = new Facade();
         }
+        return instance;
+    }
 
 
-        public void checkService() {
-            DataBaseController controller = DataBaseController.getInstance();
-            try {
-                controller.open();
-                Optional<ResultSet> rs = controller.select("SELECT 'Hello World'");
-                if (rs.isPresent()) {
-                    rs.get().first();
-                    controller.close();
-                }
-            } catch (SQLException e) {
-                System.err.println("Error al conectar al servidor de Base de Datos: " + e.getMessage());
-                System.exit(1);
-            }
-        }
-
-
-        public void initDataBase() {
-            String sqlFile = System.getProperty("user.dir") + File.separator + "sql" + File.separator + "init_db.sql";
-            //System.out.println(sqlFile);
-            DataBaseController controller = DataBaseController.getInstance();
-            try {
-                controller.open();
-                controller.initData(sqlFile);
+    public void checkService() {
+        DataBaseController controller = DataBaseController.getInstance();
+        try {
+            controller.open();
+            Optional<ResultSet> rs = controller.select("SELECT 'Hello World'");
+            if (rs.isPresent()) {
+                rs.get().first();
                 controller.close();
-            } catch (SQLException | FileNotFoundException e) {
-                System.err.println("Error al conectar al servidor de Base de Datos: " + e.getMessage());
-                System.exit(1);
             }
+        } catch (SQLException e) {
+            System.err.println("Error al conectar al servidor de Base de Datos: " + e.getMessage());
+            System.exit(1);
+        }
+    }
 
+
+    public void initDataBase() {
+        String sqlFile = System.getProperty("user.dir") + File.separator + "sql" + File.separator + "init_db.sql";
+        //System.out.println(sqlFile);
+        DataBaseController controller = DataBaseController.getInstance();
+        try {
+            controller.open();
+            controller.initData(sqlFile);
+            controller.close();
+        } catch (SQLException | FileNotFoundException e) {
+            System.err.println("Error al conectar al servidor de Base de Datos: " + e.getMessage());
+            System.exit(1);
         }
 
-        public void Proyectos() {
-            System.out.println("INICIO PROYECTOS");
+    }
 
-            ProyectoController proyectoController = ProyectoController.getInstance();
+    public void Proyectos() {
+        System.out.println("INICIO PROYECTOS");
 
-            System.out.println("GET todos los proyectos");
-            System.out.println(proyectoController.getAllProyectos());
+        ProyectoController proyectoController = ProyectoController.getInstance();
 
-            System.out.println("GET Proyecto con ID = 2");
-            System.out.println(proyectoController.getProyectoById("2"));
+        System.out.println("GET todos los proyectos");
+        System.out.println(proyectoController.getAllProyectos());
+
+        System.out.println("GET Proyecto con ID = 0e04d847-444d-4d39-9f0a-024a7191c193");
+        System.out.println(proyectoController.getProyectoById(UUID.fromString("0e04d847-444d-4d39-9f0a-024a7191c193")));
 
          /*   System.out.println("POST Proyecto");
             ProyectoDTO proyectoDTO = ProyectoDTO.builder()
@@ -72,14 +73,14 @@ import java.util.Optional;
 
            */
 
-            System.out.println("DELETE Proyecto con ID 6");
-            Optional<ProyectoDTO> optionalProyectoDTO = proyectoController.getProyectoyByIdOptional("4");
-            if (optionalProyectoDTO.isPresent()) {
-                optionalProyectoDTO.get().setNombre("Update " + LocalDateTime.now());
-                //Quizá haya que poner todos los datos
-                System.out.println(proyectoController.updateProyecto(optionalProyectoDTO.get()));
-            }
-
-
+        System.out.println("DELETE Proyecto con ID 0e04d847-444d-4d39-9f0a-024a7191c193");
+        Optional<ProyectoDTO> optionalProyectoDTO = proyectoController.getProyectoyByIdOptional(UUID.fromString("0e04d847-444d-4d39-9f0a-024a7191c193"));
+        if (optionalProyectoDTO.isPresent()) {
+            optionalProyectoDTO.get().setNombre("Update " + LocalDateTime.now());
+            //Quizá haya que poner todos los datos
+            System.out.println(proyectoController.updateProyecto(optionalProyectoDTO.get()));
         }
+
+
     }
+}

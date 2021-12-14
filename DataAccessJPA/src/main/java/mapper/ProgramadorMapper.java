@@ -28,7 +28,7 @@ public class ProgramadorMapper extends BaseMapper<Programador, ProgramadorDTO> {
                 .nombre(item.getNombre())
                 .fecha_alta(item.getFecha_alta())
                 .sueldo(item.getSueldo())
-                //.idDepartamento(item.getDepartamento().g)
+                .idDepartamento(item.getDepartamento().getId())
                 .build();
     }
 }

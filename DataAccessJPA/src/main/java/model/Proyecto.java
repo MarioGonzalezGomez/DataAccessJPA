@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.sql.Date;
 import java.util.Set;
 import java.util.UUID;
 
@@ -31,7 +31,7 @@ public class Proyecto {
     private Date fecha_fin;
 
     @OneToMany(mappedBy = "proyecto", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    private Set<Tecnologias> tecnologias;
+    private Set<model.Tecnologias> tecnologias;
 
     @ManyToOne
     @JoinColumn(name = "departamento")
@@ -100,11 +100,11 @@ public class Proyecto {
         this.fecha_fin = fecha_fin;
     }
 
-    public Set<Tecnologias> getTecnologias() {
+    public Set<model.Tecnologias> getTecnologias() {
         return tecnologias;
     }
 
-    public void setTecnologias(Set<Tecnologias> tecnologias) {
+    public void setTecnologias(Set<model.Tecnologias> tecnologias) {
         this.tecnologias = tecnologias;
     }
 

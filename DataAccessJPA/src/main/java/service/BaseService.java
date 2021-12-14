@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.UUID;
 
 @RequiredArgsConstructor // Requerimos un constructor con al menos las propiedades finales
 public abstract class BaseService<T, String, R extends CrudRepository<T, String>> {
@@ -18,7 +19,7 @@ public abstract class BaseService<T, String, R extends CrudRepository<T, String>
     }
 
     // Obtiene por ID
-    public T getById(String d) throws SQLException {
+    public T getById(UUID d) throws SQLException {
         return repository.getById(d);
     }
 
@@ -33,7 +34,7 @@ public abstract class BaseService<T, String, R extends CrudRepository<T, String>
     }
 
     // Elimina
-    public T delete(T t) throws SQLException {
+    public T delete(UUID t) throws SQLException {
         return repository.delete(t);
     }
 
