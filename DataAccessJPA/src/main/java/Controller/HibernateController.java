@@ -9,7 +9,6 @@ public class HibernateController {
     private EntityManagerFactory emf;
     private EntityManager manager;
     private EntityTransaction transaction;
-
     public HibernateController() {
 
 
