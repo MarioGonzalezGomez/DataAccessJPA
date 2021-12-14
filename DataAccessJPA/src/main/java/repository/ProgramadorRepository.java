@@ -1,8 +1,8 @@
-package Repository;
+package repository;
 
 import Controller.HibernateController;
-import Model.Departamento;
-import Model.Programador;
+import model.Departamento;
+import model.Programador;
 
 import javax.persistence.TypedQuery;
 import java.sql.SQLException;
@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-public class ProgramadorRepository {
+public class ProgramadorRepository implements CrudRepository<Programador, String> {
     HibernateController hb;
 
     public ProgramadorRepository() {

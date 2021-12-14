@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -16,7 +16,7 @@ public class Programador {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private static UUID id;
+    private static String id;
 
     @Column
     private String nombre;
@@ -47,11 +47,11 @@ public class Programador {
         return prettyGson.toJson(this);
     }
 
-    public static UUID getId() {
+    public static String getId() {
         return id;
     }
 
-    public static void setId(UUID id) {
+    public static void setId(String id) {
         Programador.id = id;
     }
 
